@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrinaEndow 20 — Kalkulator Premi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8D5A3;
+    --gold-dark: #8B6914;
+    --navy: #0D1B2A;
+    --navy-mid: #1A2F47;
+    --navy-light: #243B55;
+    --cream: #FAF8F3;
+    --cream-dark: #F0EBE0;
+    --text-primary: #0D1B2A;
+    --text-muted: #5A6B7B;
+    --text-light: #8FA0B0;
+    --border: rgba(201,168,76,0.25);
+    --border-strong: rgba(201,168,76,0.5);
+    --success: #2D7A4F;
+    --danger: #B03030;
+    --radius: 4px;
+    --radius-lg: 8px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-primary);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    padding: 28px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+  }
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .logo-mark {
+    width: 44px;
+    height: 44px;
+    border: 1.5px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo-mark svg { width: 24px; height: 24px; }
+  .header-title { color: #fff; font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 500; letter-spacing: 0.5px; }
+  .header-sub { color: var(--gold-light); font-size: 12px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+  .header-badge {
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold-light);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+  }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 1160px; margin: 0 auto; padding: 40px 40px 60px; }
+
+  .main-grid {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  /* ── PANEL ── */
+  .panel {
+    background: #fff;
+    border: 1px solid var(--border);
+  }
+  .panel-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .panel-num {
+    width: 24px; height: 24px;
+    background: var(--navy);
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .panel-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 500; }
+  .panel-body { padding: 20px 24px; }
+
+  /* ── FORM ── */
+  .field { margin-bottom: 18px; }
+  .field:last-child { margin-bottom: 0; }
+  label { display: block; font-size: 12px; font-weight: 500; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+
+  input[type="number"], select {
+    width: 100%;
+    height: 40px;
+    border: 1px solid var(--border-strong);
+    background: var(--cream);
+    padding: 0 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text-primary);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: border-color 0.15s;
+  }
+  input[type="number"]:focus, select:focus { border-color: var(--gold); background: #fff; }
+
+  .select-wrap { position: relative; }
+  .select-wrap::after {
+    content: '';
+    position: absolute;
+    right: 12px; top: 50%; transform: translateY(-50%);
+    border: 5px solid transparent;
+    border-top-color: var(--text-muted);
+    pointer-events: none;
+  }
+  .select-wrap select { padding-right: 30px; cursor: pointer; }
+
+  .gender-toggle { display: flex; gap: 0; }
+  .gender-btn {
+    flex: 1;
+    height: 40px;
+    border: 1px solid var(--border-strong);
+    background: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--text-muted);
+  }
+  .gender-btn:first-child { border-right: none; }
+  .gender-btn.active { background: var(--navy); color: var(--gold-light); border-color: var(--navy); }
+
+  .sa-input-wrap { position: relative; }
+  .sa-prefix {
+    position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+    font-size: 13px; color: var(--text-muted); pointer-events: none;
+  }
+  .sa-input-wrap input { padding-left: 40px; }
+
+  .calc-btn {
+    width: 100%;
+    height: 48px;
+    background: var(--navy);
+    color: var(--gold-light);
+    border: none;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+    margin-top: 4px;
+  }
+  .calc-btn:hover { background: var(--navy-light); }
+  .calc-btn:active { transform: scale(0.99); }
+  .calc-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* ── RESULTS ── */
+  .results-area { display: flex; flex-direction: column; gap: 24px; }
+
+  .hero-result {
+    background: var(--navy);
+    padding: 32px;
+    border-bottom: 2px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-result::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 50%;
+  }
+  .hero-result::after {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 120px; height: 120px;
+    border: 1px solid rgba(201,168,76,0.08);
+    border-radius: 50%;
+  }
+  .hero-label { color: var(--gold-light); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+  .hero-premium { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 600; color: #fff; letter-spacing: -0.5px; }
+  .hero-unit { font-size: 14px; color: var(--gold-light); margin-top: 4px; font-weight: 300; }
+  .hero-sub { margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(201,168,76,0.2); display: flex; gap: 32px; flex-wrap: wrap; }
+  .hero-stat label { color: var(--gold-light); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; display: block; margin-bottom: 4px; }
+  .hero-stat span { color: #fff; font-family: 'DM Mono', monospace; font-size: 14px; }
+
+  /* metric grid */
+  .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .metric-card { background: #fff; padding: 16px 18px; }
+  .metric-label { font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+  .metric-val { font-family: 'DM Mono', monospace; font-size: 17px; font-weight: 500; color: var(--text-primary); }
+  .metric-val.positive { color: var(--success); }
+  .metric-val.negative { color: var(--danger); }
+  .metric-sub { font-size: 11px; color: var(--text-light); margin-top: 3px; }
+
+  /* table */
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  thead th {
+    background: var(--navy);
+    color: var(--gold-light);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-align: right;
+    padding: 10px 12px;
+    white-space: nowrap;
+  }
+  thead th:first-child { text-align: center; }
+  tbody tr { border-bottom: 1px solid rgba(201,168,76,0.1); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--cream); }
+  tbody td { padding: 7px 12px; text-align: right; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-primary); }
+  tbody td:first-child { text-align: center; font-family: 'DM Sans', sans-serif; font-weight: 500; color: var(--text-muted); }
+  .row-highlight { background: rgba(201,168,76,0.06) !important; }
+
+  /* benefit chart */
+  .benefit-bar-section { background: #fff; border: 1px solid var(--border); padding: 20px 24px; }
+  .benefit-title { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 500; margin-bottom: 16px; color: var(--text-primary); }
+  .bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .bar-row:last-child { margin-bottom: 0; }
+  .bar-label { width: 160px; font-size: 12px; color: var(--text-muted); flex-shrink: 0; }
+  .bar-track { flex: 1; height: 6px; background: var(--cream-dark); position: relative; }
+  .bar-fill { height: 100%; transition: width 0.5s ease; }
+  .bar-val { width: 100px; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-primary); text-align: right; flex-shrink: 0; }
+
+  /* assumption note */
+  .note-box {
+    border-left: 2px solid var(--gold);
+    padding: 14px 18px;
+    background: rgba(201,168,76,0.04);
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+  .note-box b { color: var(--text-primary); font-weight: 500; }
+
+  /* placeholder */
+  .placeholder {
+    background: #fff;
+    border: 1px solid var(--border);
+    padding: 60px 40px;
+    text-align: center;
+  }
+  .placeholder-icon { font-size: 36px; margin-bottom: 16px; opacity: 0.3; }
+  .placeholder-text { color: var(--text-muted); font-size: 14px; line-height: 1.8; }
+
+  .error-msg {
+    background: #fff;
+    border: 1px solid #e8b4b4;
+    padding: 16px 20px;
+    color: var(--danger);
+    font-size: 13px;
+  }
+
+  /* tabs */
+  .tab-bar { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+  .tab-btn { padding: 10px 20px; font-size: 13px; font-weight: 500; color: var(--text-muted); border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
+  .tab-btn.active { color: var(--navy); border-bottom-color: var(--gold); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  @media (max-width: 900px) {
+    .main-grid { grid-template-columns: 1fr; }
+    .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+    .container { padding: 24px 20px 40px; }
+    .header { padding: 20px; }
+    .hero-premium { font-size: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M12 2L3 7v10l9 5 9-5V7L12 2z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M12 2v20M3 7l9 5 9-5" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="header-title">Prina Insurance</div>
+      <div class="header-sub">PrinaEndow 20 — Premium Calculator</div>
+    </div>
+  </div>
+  <div class="header-badge">Actuarial Grade</div>
+</header>
+
+<div class="container">
+  <div class="main-grid">
+
+    <!-- LEFT: INPUT PANEL -->
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-num">01</div>
+          <div class="panel-title">Data Tertanggung</div>
+        </div>
+        <div class="panel-body">
+          <div class="field">
+            <label>Jenis Kelamin</label>
+            <div class="gender-toggle">
+              <button class="gender-btn active" id="btn-male" onclick="setGender('male')">Laki-laki</button>
+              <button class="gender-btn" id="btn-female" onclick="setGender('female')">Perempuan</button>
+            </div>
+          </div>
+          <div class="field">
+            <label>Usia Masuk (tahun)</label>
+            <input type="number" id="inp-age" min="20" max="60" value="35" placeholder="20–60">
+          </div>
+          <div class="field">
+            <label>Uang Pertanggungan (SA)</label>
+            <div class="sa-input-wrap">
+              <span class="sa-prefix">Rp</span>
+              <input type="number" id="inp-sa" min="10000000" step="1000000" value="500000000" placeholder="Misal: 500000000">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-num">02</div>
+          <div class="panel-title">Asumsi Aktuaria</div>
+        </div>
+        <div class="panel-body">
+          <div class="field">
+            <label>Suku Bunga Teknis (%)</label>
+            <input type="number" id="inp-rate" min="1" max="15" step="0.01" value="5.5" placeholder="% per tahun">
+          </div>
+          <div class="field">
+            <label>Withdrawal Rate — Tahun 1–2 (%)</label>
+            <input type="number" id="inp-wd1" min="0" max="50" step="0.1" value="12">
+          </div>
+          <div class="field">
+            <label>Withdrawal Rate — Tahun 3–5 (%)</label>
+            <input type="number" id="inp-wd2" min="0" max="50" step="0.1" value="7">
+          </div>
+          <div class="field">
+            <label>Withdrawal Rate — Tahun 6+ (%)</label>
+            <input type="number" id="inp-wd3" min="0" max="50" step="0.1" value="3">
+          </div>
+          <button class="calc-btn" id="calc-btn" onclick="calculate()">Hitung Premi &rarr;</button>
+        </div>
+      </div>
+
+      <div class="note-box">
+        <b>Asumsi Model:</b><br>
+        Mortalitas: TMI 2019 · Multiple decrement (4 penyebab) · UDD on ASDT<br>
+        Decrement acc. death = 10% qx · TPD = 5% qx (benefit 100% SA)<br>
+        Expense: 40% Pg (Th.1) · 7% Pg (Th.2-20) · Profit loading: 15% APV Premi
+      </div>
+    </div>
+
+    <!-- RIGHT: RESULTS -->
+    <div class="results-area" id="results-area">
+      <div class="placeholder" id="placeholder">
+        <div class="placeholder-icon">◆</div>
+        <div class="placeholder-text">Masukkan data tertanggung dan klik<br><b>Hitung Premi</b> untuk melihat hasil kalkulasi.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════
+   TMI 2019 — qx per usia (crude mortality rate)
+═══════════════════════════════════════════════ */
+const TMI = {
+  male: {0:0.00524,1:0.00053,2:0.00042,3:0.00034,4:0.00029,5:0.00026,6:0.00023,7:0.00021,8:0.0002,9:0.0002,10:0.00019,11:0.00019,12:0.00019,13:0.0002,14:0.00023,15:0.00027,16:0.00031,17:0.00037,18:0.00043,19:0.00047,20:0.00049,21:0.00049,22:0.00049,23:0.00049,24:0.0005,25:0.00052,26:0.00055,27:0.0006,28:0.00065,29:0.0007,30:0.00075,31:0.00081,32:0.00087,33:0.00093,34:0.00099,35:0.00107,36:0.00116,37:0.00127,38:0.00139,39:0.00155,40:0.00173,41:0.00193,42:0.00216,43:0.00241,44:0.0027,45:0.00302,46:0.00338,47:0.00377,48:0.00418,49:0.00461,50:0.00508,51:0.00556,52:0.00609,53:0.00667,54:0.00727,55:0.00789,56:0.00847,57:0.00898,58:0.00939,59:0.00971,60:0.00999,61:0.01024,62:0.01046,63:0.01071,64:0.01104,65:0.01146,66:0.01199,67:0.0126,68:0.01329,69:0.01405,70:0.01485,71:0.01574,72:0.0167,73:0.01777,74:0.01895,75:0.02026,76:0.02369,77:0.02738,78:0.0313,79:0.03693,80:0.04518},
+  female: {0:0.00266,1:0.00041,2:0.00031,3:0.00024,4:0.00021,5:0.0002,6:0.00022,7:0.00023,8:0.00022,9:0.00021,10:0.00019,11:0.00018,12:0.0002,13:0.00022,14:0.00023,15:0.00023,16:0.00024,17:0.00024,18:0.00025,19:0.00026,20:0.00027,21:0.00028,22:0.0003,23:0.00032,24:0.00034,25:0.00038,26:0.00042,27:0.00046,28:0.00049,29:0.00052,30:0.00056,31:0.0006,32:0.00064,33:0.00069,34:0.00074,35:0.0008,36:0.00086,37:0.00093,38:0.001,39:0.00108,40:0.00118,41:0.00128,42:0.00141,43:0.00154,44:0.00169,45:0.00187,46:0.00209,47:0.0023,48:0.00253,49:0.00277,50:0.00305,51:0.00335,52:0.00368,53:0.00403,54:0.00442,55:0.00483,56:0.00524,57:0.00563,58:0.00601,59:0.00636,60:0.00671,61:0.00707,62:0.00746,63:0.00788,64:0.00833,65:0.00883,66:0.0094,67:0.01005,68:0.01076,69:0.0115,70:0.01229,71:0.01314,72:0.01406,73:0.01508,74:0.0162,75:0.01743,76:0.01879,77:0.0203,78:0.02326,79:0.0288,80:0.03569}
+};
+
+let gender = 'male';
+function setGender(g) {
+  gender = g;
+  document.getElementById('btn-male').classList.toggle('active', g === 'male');
+  document.getElementById('btn-female').classList.toggle('active', g === 'female');
+}
+
+function fmtRp(v) {
+  return 'Rp ' + Math.round(v).toLocaleString('id-ID');
+}
+function fmtPct(v, d=4) { return (v*100).toFixed(d) + '%'; }
+function fmtNum(v, d=6) { return v.toFixed(d); }
+
+/* ═══════════════════════════════════════════════
+   CORE ACTUARIAL ENGINE
+═══════════════════════════════════════════════ */
+function buildDecrement(x, gender, wd1, wd2, wd3, n=20) {
+  const rows = [];
+  for (let t = 0; t < n; t++) {
+    const age = x + t;
+    const qm1 = TMI[gender][age] || 0;  // ASDT crude non-acc death
+    const qm2 = 0.10 * qm1;             // ASDT acc death
+    const qm3 = 0.05 * qm1;             // ASDT TPD
+    let qm4;
+    if (t < 2) qm4 = wd1 / 100;
+    else if (t < 5) qm4 = wd2 / 100;
+    else qm4 = wd3 / 100;
+
+    // UDD on ASDT → MDT conversion (4 decrements)
+    // q^(j) = qm_j * [1 - 0.5*Σ_{k≠j} qm_k + 1/3*Σ_{k<l,k≠j,l≠j} qm_k*qm_l - 0.25*Π_{k≠j} qm_k]
+    const udd = (j, a, b, c, d) => {
+      const s1 = b + c + d;
+      const s2 = b*c + b*d + c*d;
+      const s3 = b*c*d;
+      return a * (1 - 0.5*s1 + (1/3)*s2 - 0.25*s3);
+    };
+    const q1 = udd(1, qm1, qm2, qm3, qm4);
+    const q2 = udd(2, qm2, qm1, qm3, qm4);
+    const q3 = udd(3, qm3, qm1, qm2, qm4);
+    const q4 = udd(4, qm4, qm1, qm2, qm3);
+    const qTau = q1 + q2 + q3 + q4;
+    const pTau = 1 - qTau;
+
+    rows.push({ t, age, qm1, qm2, qm3, qm4, q1, q2, q3, q4, qTau, pTau });
+  }
+  return rows;
+}
+
+function buildSurvival(rows) {
+  const tpx = [1.0];
+  for (let t = 0; t < rows.length; t++) {
+    tpx.push(tpx[t] * rows[t].pTau);
+  }
+  return tpx; // tpx[t] = t_p_x^(tau)
+}
+
+function computePremium(x, gend, SA, i, wd1, wd2, wd3, maxIter=10) {
+  const n = 20;
+  const v = 1 / (1 + i);
+  const rows = buildDecrement(x, gend, wd1, wd2, wd3, n);
+  const tpx = buildSurvival(rows);
+
+  // Annuity ä_x:20|^(tau)
+  let a_due = 0;
+  for (let t = 0; t < n; t++) a_due += Math.pow(v, t) * tpx[t];
+
+  // Iterative: start with Pg assuming no withdrawal benefit
+  let Pg = 0;
+
+  for (let iter = 0; iter < maxIter; iter++) {
+    // Forward recursion for reserves given current Pg
+    const V = new Array(n + 1).fill(0);
+    V[0] = 0;
+    for (let k = 0; k < n; k++) {
+      const r = rows[k];
+      const Dk = r.q1 * SA + r.q2 * 2 * SA + r.q3 * SA;
+      // V[k+1] = [(V[k] + Pg) / v - Dk - 0.5 * q4 * V[k+1]] / (1p_tau)
+      // Rearrange: V[k+1] * (p_tau + 0.5 * q4) = (V[k] + Pg) / v - Dk
+      // but simpler: V[k+1] = [(V[k]+Pg)/v - Dk - 0.5*q4*V[k+1]] / p_tau
+      // Since V[k+1] appears on both sides:
+      // V[k+1] * p_tau + 0.5*q4*V[k+1] = (V[k]+Pg)/v - Dk
+      // V[k+1] * (p_tau + 0.5*q4) = (V[k]+Pg)/v - Dk  -- NOT CORRECT
+      // Correct recursion from draft:
+      // V[k+1] = [(V[k]+Pg)/v - Dk] / (0.5*q4 + 1p_tau)
+      // BUT wait: the 0.5*q4 term in denominator arises because withdrawal CV = 0.5*V[k+1]
+      // The recursion from draft: numerator / denom
+      const num = (V[k] + Pg) / v - Dk;
+      const den = 0.5 * r.q4 + r.pTau;
+      V[k + 1] = num / den;
+    }
+
+    // APV benefits with withdrawal = 0.5*V[t+1]
+    let APV_B = 0;
+    for (let t = 0; t < n; t++) {
+      const r = rows[t];
+      const wdBen = 0.5 * V[t + 1];
+      const ben = r.q1 * SA + r.q2 * 2 * SA + r.q3 * SA + r.q4 * wdBen;
+      APV_B += Math.pow(v, t + 1) * tpx[t] * ben;
+    }
+    APV_B += Math.pow(v, n) * tpx[n] * SA; // maturity
+
+    // New Pg from equivalence principle with profit + expense
+    const newPg = APV_B / (0.78 * a_due - 0.33);
+    if (Math.abs(newPg - Pg) < 0.01) { Pg = newPg; break; }
+    Pg = newPg;
+  }
+
+  // Final reserve & metrics
+  const V = new Array(n + 1).fill(0);
+  for (let k = 0; k < n; k++) {
+    const r = rows[k];
+    const Dk = r.q1 * SA + r.q2 * 2 * SA + r.q3 * SA;
+    const num = (V[k] + Pg) / v - Dk;
+    const den = 0.5 * r.q4 + r.pTau;
+    V[k + 1] = num / den;
+  }
+
+  let APV_B = 0, APV_P = Pg * a_due;
+  for (let t = 0; t < n; t++) {
+    const r = rows[t];
+    APV_B += Math.pow(v, t + 1) * tpx[t] * (r.q1 * SA + r.q2 * 2 * SA + r.q3 * SA + r.q4 * 0.5 * V[t + 1]);
+  }
+  APV_B += Math.pow(v, n) * tpx[n] * SA;
+  const APV_exp = Pg * (0.33 + 0.07 * a_due);
+  const APV_profit = APV_P * 0.15;
+
+  return { Pg, V, rows, tpx, a_due, APV_B, APV_P, APV_exp, APV_profit, SA, i, n, x };
+}
+
+/* ═══════════════════════════════════════════════
+   RENDER
+═══════════════════════════════════════════════ */
+function calculate() {
+  const x = parseInt(document.getElementById('inp-age').value);
+  const SA = parseFloat(document.getElementById('inp-sa').value);
+  const i = parseFloat(document.getElementById('inp-rate').value) / 100;
+  const wd1 = parseFloat(document.getElementById('inp-wd1').value);
+  const wd2 = parseFloat(document.getElementById('inp-wd2').value);
+  const wd3 = parseFloat(document.getElementById('inp-wd3').value);
+
+  const errDiv = document.getElementById('calc-error');
+
+  if (x < 20 || x > 60 || isNaN(x)) {
+    showError('Usia masuk harus antara 20–60 tahun.'); return;
+  }
+  if (x + 20 > 80) {
+    showError('Usia masuk + 20 tidak boleh melebihi 80 tahun.'); return;
+  }
+  if (SA < 1000000 || isNaN(SA)) {
+    showError('Uang Pertanggungan harus minimal Rp 1.000.000.'); return;
+  }
+  if (i <= 0 || i > 0.20 || isNaN(i)) {
+    showError('Suku bunga teknis harus antara 0–20%.'); return;
+  }
+
+  const res = computePremium(x, gender, SA, i, wd1, wd2, wd3);
+  renderResults(res);
+}
+
+function showError(msg) {
+  document.getElementById('results-area').innerHTML = `<div class="error-msg">⚠ ${msg}</div>`;
+}
+
+function renderResults(r) {
+  const { Pg, V, rows, tpx, a_due, APV_B, APV_P, APV_exp, APV_profit, SA, i, n, x } = r;
+
+  const genderLabel = gender === 'male' ? 'Laki-laki' : 'Perempuan';
+
+  // Table rows
+  let tableRows = '';
+  for (let t = 0; t < n; t++) {
+    const rw = rows[t];
+    const highlight = (t + 1) % 5 === 0 ? 'row-highlight' : '';
+    const wdCV = 0.5 * V[t + 1];
+    tableRows += `<tr class="${highlight}">
+      <td>${t + 1}</td>
+      <td>${rw.age}</td>
+      <td>${fmtPct(rw.q1, 5)}</td>
+      <td>${fmtPct(rw.q2, 5)}</td>
+      <td>${fmtPct(rw.q3, 5)}</td>
+      <td>${fmtPct(rw.q4, 4)}</td>
+      <td>${fmtPct(rw.qTau, 4)}</td>
+      <td>${fmtNum(tpx[t], 6)}</td>
+      <td>${fmtRp(V[t + 1])}</td>
+      <td>${fmtRp(wdCV)}</td>
+    </tr>`;
+  }
+
+  // Benefit bars
+  const maxApv = Math.max(APV_B, APV_P, APV_exp, APV_profit);
+  const barColor = { b: '#0D1B2A', p: '#C9A84C', e: '#5A6B7B', pr: '#2D7A4F' };
+
+  document.getElementById('results-area').innerHTML = `
+
+    <div class="hero-result">
+      <div class="hero-label">Premi Kotor Tahunan (Level)</div>
+      <div class="hero-premium">${fmtRp(Pg)}</div>
+      <div class="hero-unit">dibayar di awal tahun · masa pertanggungan 20 tahun</div>
+      <div class="hero-sub">
+        <div class="hero-stat"><label>Usia Masuk</label><span>${x} tahun (${genderLabel})</span></div>
+        <div class="hero-stat"><label>Uang Pertanggungan</label><span>${fmtRp(SA)}</span></div>
+        <div class="hero-stat"><label>Suku Bunga</label><span>${(i*100).toFixed(2)}% p.a.</span></div>
+        <div class="hero-stat"><label>Ä (anuitas)</label><span>${a_due.toFixed(6)}</span></div>
+        <div class="hero-stat"><label>Premi / SA</label><span>${(Pg/SA*1000).toFixed(4)}‰</span></div>
+      </div>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label">APV Premi</div>
+        <div class="metric-val">${fmtRp(APV_P)}</div>
+        <div class="metric-sub">= Pg × ä = ekuivalen seluruh premi</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">APV Manfaat</div>
+        <div class="metric-val">${fmtRp(APV_B)}</div>
+        <div class="metric-sub">death + TPD + withdrawal + maturity</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">APV Biaya</div>
+        <div class="metric-val">${fmtRp(APV_exp)}</div>
+        <div class="metric-sub">komisi + akuisisi + administrasi</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Target Profit</div>
+        <div class="metric-val positive">${fmtRp(APV_profit)}</div>
+        <div class="metric-sub">15% × APV Premi</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Cadangan Th. 10</div>
+        <div class="metric-val">${fmtRp(V[10])}</div>
+        <div class="metric-sub">50% masa pertanggungan</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Cadangan Th. 20 (V₂₀)</div>
+        <div class="metric-val">${fmtRp(V[20])}</div>
+        <div class="metric-sub">≈ SA (boundary condition ✓)</div>
+      </div>
+    </div>
+
+    <div class="benefit-bar-section">
+      <div class="benefit-title">Komposisi APV</div>
+      ${[
+        ['APV Premi Total', APV_P, barColor.p],
+        ['APV Manfaat', APV_B, barColor.b],
+        ['APV Biaya', APV_exp, barColor.e],
+        ['APV Profit (15%)', APV_profit, barColor.pr],
+      ].map(([lbl, val, col]) => `
+        <div class="bar-row">
+          <div class="bar-label">${lbl}</div>
+          <div class="bar-track"><div class="bar-fill" style="width:${(val/maxApv*100).toFixed(1)}%;background:${col};"></div></div>
+          <div class="bar-val">${fmtRp(val)}</div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div style="background:#fff;border:1px solid var(--border);">
+      <div style="padding:16px 24px 0;">
+        <div class="tab-bar">
+          <button class="tab-btn active" onclick="switchTab(this,'tab-decrement')">Tabel Decrement</button>
+          <button class="tab-btn" onclick="switchTab(this,'tab-reserve')">Grafik Cadangan</button>
+          <button class="tab-btn" onclick="switchTab(this,'tab-benefit')">Ringkasan Manfaat</button>
+        </div>
+      </div>
+
+      <div class="tab-content active" id="tab-decrement" style="padding:0 0 4px;">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Th</th>
+                <th>Usia</th>
+                <th>q¹ (non-acc)</th>
+                <th>q² (acc)</th>
+                <th>q³ (TPD)</th>
+                <th>q⁴ (WD)</th>
+                <th>q^τ (total)</th>
+                <th>ₜp^τ</th>
+                <th>Cadangan V_{t}</th>
+                <th>CV Withdrawal</th>
+              </tr>
+            </thead>
+            <tbody>${tableRows}</tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-reserve" style="padding:20px 24px;">
+        <div class="section-title">Perkembangan Cadangan Polis (₀V s.d. ₂₀V)</div>
+        <div style="position:relative;height:220px;margin-top:8px;">
+          <canvas id="reserve-chart" style="width:100%;height:100%;"></canvas>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-benefit" style="padding:20px 24px;">
+        <div class="section-title">Manfaat yang Dibayarkan per Kondisi</div>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;">
+          <thead>
+            <tr>
+              <th style="text-align:left;padding:10px 12px;background:var(--navy);color:var(--gold-light);font-weight:500;">Kondisi</th>
+              <th style="text-align:right;padding:10px 12px;background:var(--navy);color:var(--gold-light);font-weight:500;">Manfaat</th>
+              <th style="text-align:right;padding:10px 12px;background:var(--navy);color:var(--gold-light);font-weight:500;">Nilai</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${[
+              ['Meninggal Non-Kecelakaan (j=1)', '100% SA', SA],
+              ['Meninggal Kecelakaan (j=2)', '200% SA', 2*SA],
+              ['Cacat Tetap Total — Kedua tangan/kaki/mata (j=3)', '100% SA', SA],
+              ['Cacat Tetap Total — Satu anggota gerak atas (j=3)', '65% SA', 0.65*SA],
+              ['Cacat Tetap Total — Satu anggota gerak bawah (j=3)', '50% SA', 0.5*SA],
+              ['Cacat Tetap Total — Satu mata (j=3)', '30% SA', 0.3*SA],
+              ['Withdrawal — Cadangan Th.5 (contoh)', '50% × V₅', 0.5*V[5]],
+              ['Withdrawal — Cadangan Th.10 (contoh)', '50% × V₁₀', 0.5*V[10]],
+              ['Withdrawal — Cadangan Th.15 (contoh)', '50% × V₁₅', 0.5*V[15]],
+              ['Maturity (survive 20 tahun)', '100% SA', SA],
+            ].map(([cond, pct, val], i) => `
+              <tr style="border-bottom:1px solid rgba(201,168,76,0.1);${i%2===0?'':'background:var(--cream);'}">
+                <td style="padding:9px 12px;font-size:13px;">${cond}</td>
+                <td style="padding:9px 12px;text-align:right;font-size:13px;color:var(--text-muted);">${pct}</td>
+                <td style="padding:9px 12px;text-align:right;font-family:'DM Mono',monospace;font-size:13px;">${fmtRp(val)}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  `;
+
+  // Draw reserve chart after DOM update
+  setTimeout(() => drawReserveChart(V, SA), 50);
+}
+
+function switchTab(btn, tabId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+  if (tabId === 'tab-reserve') {
+    setTimeout(() => {
+      const canvas = document.getElementById('reserve-chart');
+      if (canvas && canvas._data) drawReserveChart(canvas._data.V, canvas._data.SA);
+    }, 10);
+  }
+}
+
+function drawReserveChart(V, SA) {
+  const canvas = document.getElementById('reserve-chart');
+  if (!canvas) return;
+  canvas._data = { V, SA };
+  const ctx = canvas.getContext('2d');
+  const W = canvas.parentElement.clientWidth - 48;
+  const H = 220;
+  canvas.width = W;
+  canvas.height = H;
+  ctx.clearRect(0, 0, W, H);
+
+  const pad = { top: 16, right: 16, bottom: 32, left: 72 };
+  const gW = W - pad.left - pad.right;
+  const gH = H - pad.top - pad.bottom;
+
+  const maxV = Math.max(...V);
+  const yScale = v => pad.top + gH * (1 - v / maxV);
+  const xScale = t => pad.left + gW * (t / 20);
+
+  // Grid
+  ctx.strokeStyle = 'rgba(201,168,76,0.12)';
+  ctx.lineWidth = 0.5;
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.top + gH * (i / 4);
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(pad.left + gW, y); ctx.stroke();
+  }
+
+  // SA reference line
+  ctx.setLineDash([4, 4]);
+  ctx.strokeStyle = 'rgba(201,168,76,0.4)';
+  ctx.lineWidth = 1;
+  const ySA = yScale(SA);
+  ctx.beginPath(); ctx.moveTo(pad.left, ySA); ctx.lineTo(pad.left + gW, ySA); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Reserve curve — fill
+  ctx.beginPath();
+  ctx.moveTo(xScale(0), yScale(0));
+  for (let t = 1; t <= 20; t++) ctx.lineTo(xScale(t), yScale(V[t]));
+  ctx.lineTo(xScale(20), H - pad.bottom);
+  ctx.lineTo(xScale(0), H - pad.bottom);
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(13,27,42,0.08)';
+  ctx.fill();
+
+  // Reserve curve — line
+  ctx.beginPath();
+  ctx.moveTo(xScale(0), yScale(0));
+  for (let t = 1; t <= 20; t++) ctx.lineTo(xScale(t), yScale(V[t]));
+  ctx.strokeStyle = '#0D1B2A';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // Dots
+  for (let t = 0; t <= 20; t++) {
+    ctx.beginPath();
+    ctx.arc(xScale(t), yScale(V[t]), t % 5 === 0 ? 4 : 2, 0, Math.PI * 2);
+    ctx.fillStyle = t % 5 === 0 ? '#C9A84C' : '#0D1B2A';
+    ctx.fill();
+  }
+
+  // Y axis labels
+  ctx.fillStyle = '#5A6B7B';
+  ctx.font = '11px DM Sans, sans-serif';
+  ctx.textAlign = 'right';
+  for (let i = 0; i <= 4; i++) {
+    const val = maxV * (1 - i / 4);
+    const y = pad.top + gH * (i / 4);
+    ctx.fillText((val / 1e6).toFixed(0) + 'jt', pad.left - 6, y + 4);
+  }
+
+  // X axis labels
+  ctx.textAlign = 'center';
+  for (let t = 0; t <= 20; t += 5) {
+    ctx.fillText('Th ' + t, xScale(t), H - pad.bottom + 16);
+  }
+
+  // SA label
+  ctx.fillStyle = '#C9A84C';
+  ctx.textAlign = 'left';
+  ctx.font = '10px DM Mono, monospace';
+  ctx.fillText('SA', pad.left + 4, ySA - 4);
+}
+
+// Hide placeholder
+document.getElementById('placeholder') && null;
+</script>
+</body>
+</html>
