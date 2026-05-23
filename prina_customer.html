@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrinaEndow 20 — Lindungi Keluarga, Pastikan Masa Depan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sage:#4A7C6F;
+  --sage-light:#7BAD9F;
+  --sage-pale:#EAF3F0;
+  --sage-deep:#2D5C52;
+  --warm:#F5F0E8;
+  --warm-dark:#EDE5D4;
+  --warm-darker:#D4C9B0;
+  --cream:#FDFAF5;
+  --gold:#C8965A;
+  --gold-light:#E8C99A;
+  --text:#2A2A2A;
+  --text-mid:#555;
+  --text-muted:#888;
+  --white:#fff;
+  --radius:12px;
+  --radius-lg:20px;
+  --shadow:0 2px 20px rgba(0,0,0,0.06);
+  --shadow-lg:0 8px 40px rgba(0,0,0,0.10);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:var(--text);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+
+/* ── HERO ── */
+.hero{background:var(--sage-deep);padding:0;position:relative;overflow:hidden;min-height:100vh;display:flex;flex-direction:column}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%, rgba(74,124,111,0.4) 0%, transparent 60%)}
+.hero-circles{position:absolute;inset:0;overflow:hidden}
+.hero-circles span{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,0.06)}
+.hero-circles span:nth-child(1){width:600px;height:600px;top:-100px;right:-150px}
+.hero-circles span:nth-child(2){width:400px;height:400px;top:50px;right:-50px}
+.hero-circles span:nth-child(3){width:200px;height:200px;top:160px;right:80px}
+nav{position:relative;z-index:10;padding:24px 40px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:12px}
+.nav-logo-mark{width:36px;height:36px;border:1.5px solid rgba(200,150,90,0.7);display:flex;align-items:center;justify-content:center}
+.nav-logo-mark svg{width:18px;height:18px}
+.nav-brand{color:#fff;font-family:'Lora',serif;font-size:16px;font-weight:500}
+.nav-sub{color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
+.nav-cta{background:var(--gold);color:#fff;border:none;padding:10px 22px;border-radius:50px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all 0.2s}
+.nav-cta:hover{background:#b07d40;transform:translateY(-1px)}
+
+.hero-content{position:relative;z-index:5;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px 60px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.8);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;padding:7px 16px;border-radius:50px;margin-bottom:28px}
+.hero-eyebrow span{width:6px;height:6px;background:var(--gold);border-radius:50%;display:inline-block}
+.hero-h1{font-family:'Lora',serif;font-size:clamp(32px,5vw,58px);font-weight:600;color:#fff;line-height:1.2;margin-bottom:20px;max-width:760px}
+.hero-h1 em{color:var(--gold-light);font-style:italic}
+.hero-lead{color:rgba(255,255,255,0.65);font-size:clamp(15px,2vw,18px);font-weight:300;max-width:560px;margin-bottom:40px}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.btn-primary{background:var(--gold);color:#fff;border:none;padding:14px 32px;border-radius:50px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all 0.2s;text-decoration:none;display:inline-block}
+.btn-primary:hover{background:#b07d40;transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,150,90,0.4)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.3);padding:14px 32px;border-radius:50px;font-size:15px;font-weight:500;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all 0.2s}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.05)}
+
+.hero-stats{position:relative;z-index:5;display:flex;justify-content:center;gap:0;padding:0 24px 0}
+.hero-stat-card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);padding:20px 32px;text-align:center;backdrop-filter:blur(10px);flex:1;max-width:220px}
+.hero-stat-card:first-child{border-radius:var(--radius) 0 0 var(--radius)}
+.hero-stat-card:last-child{border-radius:0 var(--radius) var(--radius) 0}
+.hero-stat-card:not(:last-child){border-right:none}
+.hero-stat-num{font-family:'Lora',serif;font-size:26px;font-weight:600;color:#fff}
+.hero-stat-label{font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px}
+.wave{margin-top:-1px;line-height:0}
+.wave svg{display:block;width:100%}
+
+/* ── SECTION ── */
+section{padding:80px 24px}
+.container{max-width:1060px;margin:0 auto}
+.section-tag{display:inline-block;background:var(--sage-pale);color:var(--sage-deep);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border-radius:50px;margin-bottom:16px}
+.section-title{font-family:'Lora',serif;font-size:clamp(26px,4vw,38px);font-weight:600;color:var(--text);line-height:1.25;margin-bottom:12px}
+.section-lead{color:var(--text-muted);font-size:16px;max-width:560px;line-height:1.8}
+
+/* ── CALCULATOR ── */
+.calc-section{background:var(--warm)}
+.calc-wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;margin-top:48px}
+
+.calc-card{background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);padding:36px;border:1px solid rgba(0,0,0,0.04)}
+.calc-title{font-family:'Lora',serif;font-size:18px;font-weight:600;margin-bottom:24px;color:var(--text)}
+
+.field{margin-bottom:20px}
+.field:last-of-type{margin-bottom:0}
+label{display:block;font-size:12px;font-weight:600;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase}
+.gender-toggle{display:flex;gap:8px}
+.g-btn{flex:1;height:44px;border:1.5px solid var(--warm-darker);background:var(--warm);border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:var(--text-muted);cursor:pointer;transition:all 0.2s}
+.g-btn.active{background:var(--sage-deep);color:#fff;border-color:var(--sage-deep)}
+.inp-wrap{position:relative}
+.inp-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--text-muted);pointer-events:none;font-weight:600}
+input[type=number],select{width:100%;height:44px;border:1.5px solid var(--warm-darker);border-radius:50px;background:var(--warm);font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color 0.2s;padding:0 16px;-webkit-appearance:none;appearance:none}
+input[type=number]:focus,select:focus{border-color:var(--sage);background:#fff}
+.inp-has-prefix input{padding-left:44px}
+.range-wrap{padding:0 4px}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:4px;background:var(--warm-darker);border-radius:2px;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--sage);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.2);cursor:pointer}
+.range-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-top:6px}
+.range-val{text-align:center;font-family:'Lora',serif;font-size:22px;font-weight:600;color:var(--sage-deep);margin-bottom:6px}
+
+.calc-btn{width:100%;height:52px;background:var(--sage-deep);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;margin-top:24px;transition:all 0.2s;letter-spacing:0.3px}
+.calc-btn:hover{background:var(--sage);transform:translateY(-2px);box-shadow:0 8px 24px rgba(45,92,82,0.3)}
+.calc-btn:active{transform:scale(0.99)}
+
+/* results */
+.results-card{background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);overflow:hidden;border:1px solid rgba(0,0,0,0.04)}
+.results-header{background:var(--sage-deep);padding:28px 32px}
+.results-header-label{color:rgba(255,255,255,0.6);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.premi-big{font-family:'Lora',serif;font-size:38px;font-weight:600;color:#fff}
+.premi-period{color:rgba(255,255,255,0.5);font-size:13px;margin-top:4px}
+.results-body{padding:28px 32px}
+
+.scenario-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.s-tab{padding:8px 18px;border-radius:50px;border:1.5px solid var(--warm-darker);background:var(--warm);font-size:13px;font-weight:600;color:var(--text-muted);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all 0.2s}
+.s-tab.active{background:var(--sage-pale);border-color:var(--sage);color:var(--sage-deep)}
+
+.scenario-panel{display:none}
+.scenario-panel.active{display:block}
+
+.benefit-hero{background:var(--sage-pale);border-radius:var(--radius);padding:20px 24px;margin-bottom:20px;display:flex;align-items:center;gap:16px}
+.benefit-icon{width:48px;height:48px;border-radius:50%;background:var(--sage-deep);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.benefit-icon svg{width:22px;height:22px}
+.benefit-label{font-size:13px;color:var(--sage-deep);font-weight:600;margin-bottom:4px}
+.benefit-amount{font-family:'Lora',serif;font-size:26px;font-weight:600;color:var(--sage-deep)}
+.benefit-note{font-size:12px;color:var(--sage-light);margin-top:2px}
+
+.detail-rows{}
+.detail-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--warm-dark)}
+.detail-row:last-child{border-bottom:none}
+.detail-row-label{font-size:13px;color:var(--text-muted);display:flex;align-items:center;gap:8px}
+.detail-row-label .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.detail-row-val{font-family:'Lora',serif;font-size:16px;font-weight:600;color:var(--text)}
+
+.reserve-timeline{margin-top:20px}
+.timeline-label{font-size:12px;color:var(--text-muted);font-weight:600;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:12px}
+.timeline-bar-wrap{position:relative;height:8px;background:var(--warm-dark);border-radius:4px;margin-bottom:20px}
+.timeline-bar-fill{height:100%;background:linear-gradient(to right,var(--sage-pale),var(--sage));border-radius:4px;transition:width 0.6s ease}
+.timeline-milestones{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.milestone{background:var(--warm);border-radius:var(--radius);padding:12px;text-align:center}
+.milestone-yr{font-size:11px;color:var(--text-muted);font-weight:600;text-transform:uppercase;margin-bottom:4px}
+.milestone-val{font-family:'Lora',serif;font-size:14px;font-weight:600;color:var(--sage-deep)}
+
+.placeholder-result{text-align:center;padding:48px 24px}
+.placeholder-result .emoji{font-size:40px;margin-bottom:16px;display:block;opacity:0.4}
+.placeholder-result p{color:var(--text-muted);font-size:14px;line-height:1.8}
+
+/* ── WHY SECTION ── */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.why-card{background:var(--white);border-radius:var(--radius-lg);padding:32px;border:1px solid rgba(0,0,0,0.05);transition:transform 0.2s,box-shadow 0.2s}
+.why-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.why-icon{width:52px;height:52px;border-radius:var(--radius);background:var(--sage-pale);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.why-icon svg{width:26px;height:26px}
+.why-title{font-family:'Lora',serif;font-size:18px;font-weight:600;margin-bottom:10px}
+.why-desc{font-size:14px;color:var(--text-muted);line-height:1.8}
+
+/* ── STORY ── */
+.story-section{background:var(--sage-deep);padding:80px 24px}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.story-left .section-tag{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7)}
+.story-left .section-title{color:#fff}
+.story-left .section-lead{color:rgba(255,255,255,0.6)}
+.story-right{}
+.story-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-lg);padding:28px;margin-bottom:16px;transition:background 0.2s}
+.story-card:hover{background:rgba(255,255,255,0.12)}
+.story-card:last-child{margin-bottom:0}
+.story-scenario{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:8px}
+.story-desc{font-size:14px;color:rgba(255,255,255,0.75);margin-bottom:14px;line-height:1.7}
+.story-benefit{font-family:'Lora',serif;font-size:20px;color:#fff;font-weight:600}
+.story-benefit span{font-size:13px;font-weight:400;color:rgba(255,255,255,0.5);margin-left:8px}
+
+/* ── FAQ ── */
+.faq-section{background:var(--warm)}
+.faq-list{margin-top:40px;max-width:720px}
+.faq-item{border-bottom:1px solid var(--warm-darker);padding:20px 0}
+.faq-q{font-weight:600;font-size:15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;user-select:none}
+.faq-arrow{color:var(--sage);font-size:18px;transition:transform 0.25s;flex-shrink:0}
+.faq-a{font-size:14px;color:var(--text-muted);line-height:1.85;max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding 0.3s}
+.faq-item.open .faq-arrow{transform:rotate(180deg)}
+.faq-item.open .faq-a{max-height:300px;padding-top:12px}
+
+/* ── CTA ── */
+.cta-section{background:var(--gold);padding:80px 24px;text-align:center}
+.cta-section .section-title{color:#fff;margin:0 auto 12px}
+.cta-section .section-lead{color:rgba(255,255,255,0.75);margin:0 auto 36px}
+.btn-white{background:#fff;color:var(--gold);border:none;padding:16px 40px;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,0.15)}
+
+/* ── FOOTER ── */
+footer{background:var(--sage-deep);padding:40px 24px;text-align:center}
+.footer-brand{font-family:'Lora',serif;font-size:18px;color:#fff;margin-bottom:8px}
+.footer-note{font-size:12px;color:rgba(255,255,255,0.35);line-height:1.8;max-width:560px;margin:0 auto}
+
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  .calc-wrap,.story-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr 1fr}
+  nav{padding:20px}
+  .hero-stats{flex-wrap:wrap;gap:12px}
+  .hero-stat-card{flex:0 0 calc(50% - 6px);border-radius:var(--radius) !important;border:1px solid rgba(255,255,255,0.1) !important}
+}
+@media(max-width:560px){
+  .why-grid{grid-template-columns:1fr}
+  .timeline-milestones{grid-template-columns:repeat(2,1fr)}
+  nav .nav-cta{display:none}
+}
+
+/* animation */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{opacity:0;animation:fadeUp 0.6s ease forwards}
+.fade-up.d1{animation-delay:0.1s}.fade-up.d2{animation-delay:0.25s}.fade-up.d3{animation-delay:0.4s}.fade-up.d4{animation-delay:0.55s}
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-circles"><span></span><span></span><span></span></div>
+  <nav>
+    <div class="nav-logo">
+      <div class="nav-logo-mark">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v10l9 5 9-5V7L12 2z" stroke="#C8965A" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 2v20M3 7l9 5 9-5" stroke="#C8965A" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      </div>
+      <div>
+        <div class="nav-brand">Prina Insurance</div>
+        <div class="nav-sub">PrinaEndow 20</div>
+      </div>
+    </div>
+    <button class="nav-cta" onclick="document.getElementById('kalkulator').scrollIntoView({behavior:'smooth'})">Hitung Premi Saya</button>
+  </nav>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow fade-up d1"><span></span>Asuransi Jiwa Endowment 20 Tahun</div>
+    <h1 class="hero-h1 fade-up d2">Satu Polis. Proteksi Penuh.<br><em>Masa Depan Terjamin.</em></h1>
+    <p class="hero-lead fade-up d3">Lindungi keluarga dari risiko tak terduga, sekaligus pastikan tabungan maturity untuk masa depan — dalam satu produk yang sederhana dan terpercaya.</p>
+    <div class="hero-actions fade-up d4">
+      <button class="btn-primary" onclick="document.getElementById('kalkulator').scrollIntoView({behavior:'smooth'})">Simulasikan Sekarang →</button>
+      <button class="btn-ghost" onclick="document.getElementById('kenapa').scrollIntoView({behavior:'smooth'})">Pelajari Produk</button>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat-card"><div class="hero-stat-num">20 Th</div><div class="hero-stat-label">Masa pertanggungan</div></div>
+    <div class="hero-stat-card"><div class="hero-stat-num">4 ×</div><div class="hero-stat-label">Jenis proteksi sekaligus</div></div>
+    <div class="hero-stat-card"><div class="hero-stat-num">100%</div><div class="hero-stat-label">SA kembali saat maturity</div></div>
+    <div class="hero-stat-card"><div class="hero-stat-num">200%</div><div class="hero-stat-label">SA jika kecelakaan</div></div>
+  </div>
+  <div class="wave"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0 60 C360 0 1080 0 1440 60 L1440 60 L0 60Z" fill="#FDFAF5"/></svg></div>
+</div>
+
+<!-- ── KENAPA ── -->
+<section id="kenapa">
+  <div class="container">
+    <div class="section-tag">Mengapa PrinaEndow 20</div>
+    <h2 class="section-title">Empat Perlindungan dalam<br>Satu Produk</h2>
+    <p class="section-lead">Tidak perlu membeli banyak polis terpisah. PrinaEndow 20 dirancang untuk menjawab 4 risiko utama kehidupan sekaligus.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2D5C52" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="why-title">Meninggal karena Penyakit</div>
+        <div class="why-desc">Keluarga mendapat <strong>100% Uang Pertanggungan</strong> — cukup untuk melanjutkan hidup tanpa khawatir beban finansial.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2D5C52" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="why-title">Meninggal karena Kecelakaan</div>
+        <div class="why-desc">Keluarga mendapat <strong>200% Uang Pertanggungan</strong> — perlindungan ganda karena risiko kecelakaan lebih besar dampaknya.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2D5C52" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div class="why-title">Cacat Tetap Total (TPD)</div>
+        <div class="why-desc">Ketidakmampuan bekerja tidak harus menguras tabungan. Manfaat hingga <strong>100% SA</strong> sesuai kategori kecacatan.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2D5C52" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        </div>
+        <div class="why-title">Fleksibel: Bisa Dicairkan</div>
+        <div class="why-desc">Butuh dana mendadak? Nilai tunai polis bisa dicairkan kapan saja dengan nilai <strong>50% dari cadangan</strong> yang sudah terkumpul.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2D5C52" stroke-width="1.8"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        </div>
+        <div class="why-title">Tabungan Maturity</div>
+        <div class="why-desc">Jika sehat hingga akhir polis, nikmati <strong>100% SA kembali</strong> — bisa untuk pendidikan anak, pensiun, atau modal usaha.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2D5C52" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="why-title">Premi Tetap 20 Tahun</div>
+        <div class="why-desc">Tidak ada kenaikan premi di tengah jalan. Bayar premi yang <strong>sama setiap tahun</strong>, proteksi tidak berubah selama 20 tahun.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── KALKULATOR ── -->
+<section class="calc-section" id="kalkulator">
+  <div class="container">
+    <div class="section-tag">Simulasi Premi</div>
+    <h2 class="section-title">Berapa Premi Saya?</h2>
+    <p class="section-lead">Masukkan data Anda, dan kami tunjukkan berapa premi yang perlu dibayar — serta manfaat lengkap yang Anda dan keluarga dapatkan.</p>
+
+    <div class="calc-wrap">
+      <!-- INPUT -->
+      <div class="calc-card">
+        <div class="calc-title">Data Saya</div>
+
+        <div class="field">
+          <label>Jenis Kelamin</label>
+          <div class="gender-toggle">
+            <button class="g-btn active" id="gbm" onclick="setGender('male')">Laki-laki</button>
+            <button class="g-btn" id="gbf" onclick="setGender('female')">Perempuan</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Usia Saat Ini</label>
+          <div class="range-val" id="age-display">35 tahun</div>
+          <div class="range-wrap">
+            <input type="range" id="inp-age" min="20" max="60" value="35" oninput="document.getElementById('age-display').textContent=this.value+' tahun'">
+            <div class="range-labels"><span>20 th</span><span>60 th</span></div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Uang Pertanggungan yang Diinginkan</label>
+          <div class="range-val" id="sa-display">Rp 500 juta</div>
+          <div class="range-wrap">
+            <input type="range" id="inp-sa" min="1" max="20" value="5" step="1" oninput="updateSADisplay(this.value)">
+            <div class="range-labels"><span>Rp 100jt</span><span>Rp 2M</span></div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Suku Bunga Teknis (% per tahun)</label>
+          <div class="range-val" id="rate-display">5,5%</div>
+          <div class="range-wrap">
+            <input type="range" id="inp-rate" min="30" max="120" value="55" step="1" oninput="document.getElementById('rate-display').textContent=(this.value/10).toFixed(1).replace('.',',')+'%'">
+            <div class="range-labels"><span>3%</span><span>12%</span></div>
+          </div>
+        </div>
+
+        <button class="calc-btn" onclick="calculate()">Lihat Proteksi & Premi Saya →</button>
+      </div>
+
+      <!-- OUTPUT -->
+      <div class="results-card" id="results-card">
+        <div id="results-placeholder" class="placeholder-result" style="padding:80px 32px;">
+          <span class="emoji">🛡️</span>
+          <p>Geser slider di sebelah kiri, lalu klik <strong>Lihat Proteksi & Premi Saya</strong> untuk melihat simulasi lengkap Anda.</p>
+        </div>
+        <div id="results-content" style="display:none">
+          <div class="results-header">
+            <div class="results-header-label">Premi Tahunan Anda</div>
+            <div class="premi-big" id="res-premi">—</div>
+            <div class="premi-period">dibayar setiap tahun · selama 20 tahun</div>
+          </div>
+          <div class="results-body">
+            <div class="scenario-tabs">
+              <button class="s-tab active" onclick="switchScenario(this,'sc-death')">🏥 Meninggal</button>
+              <button class="s-tab" onclick="switchScenario(this,'sc-accident')">⚡ Kecelakaan</button>
+              <button class="s-tab" onclick="switchScenario(this,'sc-tpd')">🦽 Cacat (TPD)</button>
+              <button class="s-tab" onclick="switchScenario(this,'sc-maturity')">🌟 Maturity</button>
+            </div>
+
+            <!-- SCENARIO: DEATH -->
+            <div class="scenario-panel active" id="sc-death">
+              <div class="benefit-hero">
+                <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+                <div>
+                  <div class="benefit-label">Keluarga menerima</div>
+                  <div class="benefit-amount" id="res-death">—</div>
+                  <div class="benefit-note">Dibayarkan di akhir tahun terjadinya</div>
+                </div>
+              </div>
+              <div class="detail-rows">
+                <div class="detail-row"><div class="detail-row-label"><span class="dot" style="background:var(--sage)"></span>Uang Pertanggungan</div><div class="detail-row-val" id="res-sa">—</div></div>
+                <div class="detail-row"><div class="detail-row-label"><span class="dot" style="background:var(--warm-darker)"></span>Polis berakhir setelah klaim</div><div class="detail-row-val">✓</div></div>
+                <div class="detail-row"><div class="detail-row-label"><span class="dot" style="background:var(--warm-darker)"></span>Premi tidak perlu lagi dibayar</div><div class="detail-row-val">✓</div></div>
+              </div>
+            </div>
+
+            <!-- SCENARIO: ACCIDENT -->
+            <div class="scenario-panel" id="sc-accident">
+              <div class="benefit-hero">
+                <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                <div>
+                  <div class="benefit-label">Keluarga menerima (200% SA)</div>
+                  <div class="benefit-amount" id="res-accident">—</div>
+                  <div class="benefit-note">Perlindungan ganda untuk kecelakaan</div>
+                </div>
+              </div>
+              <div class="detail-rows">
+                <div class="detail-row"><div class="detail-row-label"><span class="dot" style="background:var(--gold)"></span>Dua kali lipat SA</div><div class="detail-row-val" id="res-acc2">—</div></div>
+                <div class="detail-row"><div class="detail-row-label"><span class="dot" style="background:var(--warm-darker)"></span>Berlaku selama 20 tahun penuh</div><div class="detail-row-val">✓</div></div>
+              </div>
+            </div>
+
+            <!-- SCENARIO: TPD -->
+            <div class="scenario-panel" id="sc-tpd">
+              <div class="benefit-hero">
+                <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+                <div>
+                  <div class="benefit-label">Manfaat TPD (maks.)</div>
+                  <div class="benefit-amount" id="res-tpd">—</div>
+                  <div class="benefit-note">Sesuai kategori kecacatan</div>
+                </div>
+              </div>
+              <div class="detail-rows">
+                <div class="detail-row"><div class="detail-row-label"><span class="dot" style="background:var(--sage)"></span>Kedua tangan / kaki / mata</div><div class="detail-row-val" id="res-tpd100">—</div></div>
+                <div class="detail-row"><div class="detail-row-label"><span class="dot" style="background:var(--sage-light)"></span>Satu anggota gerak atas</div><div class="detail-row-val" id="res-tpd65">—</div></div>
+                <div class="detail-row"><div class="detail-row-label"><span class="dot" style="background:var(--warm-darker)"></span>Satu anggota gerak bawah</div><div class="detail-row-val" id="res-tpd50">—</div></div>
+                <div class="detail-row"><div class="detail-row-label"><span class="dot" style="background:var(--warm-darker)"></span>Satu mata</div><div class="detail-row-val" id="res-tpd30">—</div></div>
+              </div>
+            </div>
+
+            <!-- SCENARIO: MATURITY -->
+            <div class="scenario-panel" id="sc-maturity">
+              <div class="benefit-hero">
+                <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg></div>
+                <div>
+                  <div class="benefit-label">Anda menerima di akhir Th.20</div>
+                  <div class="benefit-amount" id="res-maturity">—</div>
+                  <div class="benefit-note">100% SA kembali ke tangan Anda</div>
+                </div>
+              </div>
+              <div class="reserve-timeline">
+                <div class="timeline-label">Pertumbuhan Nilai Cadangan Polis</div>
+                <div class="timeline-bar-wrap"><div class="timeline-bar-fill" id="timeline-fill" style="width:100%"></div></div>
+                <div class="timeline-milestones" id="timeline-milestones"></div>
+              </div>
+            </div>
+
+          </div><!-- results-body -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STORY ── -->
+<div class="story-section" id="skenario">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-left">
+        <div class="section-tag">Skenario Nyata</div>
+        <h2 class="section-title">Apa yang Terjadi<br>Jika…?</h2>
+        <p class="section-lead">Tidak ada yang tahu apa yang akan terjadi besok. PrinaEndow 20 memastikan keluarga Anda terlindungi — apapun yang terjadi.</p>
+        <br><br>
+        <p style="color:rgba(255,255,255,0.4);font-size:13px;line-height:1.8">* Contoh ilustrasi untuk nasabah usia 35 tahun, laki-laki, SA Rp 500 juta. Nilai aktual bergantung pada data individu.</p>
+      </div>
+      <div class="story-right">
+        <div class="story-card">
+          <div class="story-scenario">Skenario 1 — Tahun ke-10</div>
+          <div class="story-desc">Budi, 45 tahun, mengalami serangan jantung saat bekerja. Ia meninggal meninggalkan istri dan dua anak yang masih sekolah.</div>
+          <div class="story-benefit">Rp 500.000.000 <span>diterima keluarga</span></div>
+        </div>
+        <div class="story-card">
+          <div class="story-scenario">Skenario 2 — Tahun ke-7</div>
+          <div class="story-desc">Dewi, 42 tahun, mengalami kecelakaan lalu lintas dan kehilangan penglihatan pada kedua matanya secara permanen.</div>
+          <div class="story-benefit">Rp 500.000.000 <span>manfaat TPD 100%</span></div>
+        </div>
+        <div class="story-card">
+          <div class="story-scenario">Skenario 3 — Sehat hingga Akhir</div>
+          <div class="story-desc">Arif, sehat dan aktif hingga usia 55 tahun, polis maturity di akhir tahun ke-20. Dana dikirimkan langsung ke rekeningnya.</div>
+          <div class="story-benefit">Rp 500.000.000 <span>maturity benefit</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FAQ ── -->
+<section class="faq-section">
+  <div class="container">
+    <div class="section-tag">Pertanyaan Umum</div>
+    <h2 class="section-title">Yang Sering Ditanyakan</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Apakah premi saya bisa naik di tengah polis? <span class="faq-arrow">↓</span></div>
+        <div class="faq-a">Tidak. PrinaEndow 20 menggunakan sistem premi tetap (level gross premium). Premi yang Anda bayar di tahun pertama akan sama hingga tahun ke-20. Tidak ada kenaikan akibat usia, inflasi, atau kondisi kesehatan selama masa pertanggungan.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Bagaimana jika saya butuh dana darurat di tengah jalan? <span class="faq-arrow">↓</span></div>
+        <div class="faq-a">Polis ini memiliki nilai tunai (cash value) yang bisa dicairkan kapan saja melalui mekanisme surrender. Nilai yang diterima adalah 50% dari cadangan polis yang sudah terkumpul. Simulasi nilai tunai per tahun bisa dilihat di fitur kalkulator di atas.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Apa perbedaan manfaat meninggal biasa dan kecelakaan? <span class="faq-arrow">↓</span></div>
+        <div class="faq-a">Jika meninggal karena penyakit atau sebab alami lainnya, keluarga menerima 100% Uang Pertanggungan (SA). Jika meninggal akibat kecelakaan (misalnya kecelakaan lalu lintas, bencana, dll.), keluarga menerima 200% SA — dua kali lipat lebih besar sebagai bentuk perlindungan tambahan.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Berapa usia maksimum yang bisa mendaftar? <span class="faq-arrow">↓</span></div>
+        <div class="faq-a">Usia masuk antara 20 hingga 60 tahun, dengan syarat usia saat polis berakhir tidak melebihi 80 tahun. Artinya, jika Anda berusia 60 tahun, masa pertanggungan tetap 20 tahun dan polis berakhir saat usia 80 tahun.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Manfaat cacat (TPD) — apakah polis tetap berlanjut setelahnya? <span class="faq-arrow">↓</span></div>
+        <div class="faq-a">Tidak. Setelah manfaat TPD dibayarkan, polis dianggap berakhir. Ini berarti Anda tidak perlu lagi membayar premi, dan polis tertutup. Manfaat yang diterima bisa digunakan untuk biaya hidup, rehabilitasi, atau keperluan lainnya.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Apakah ada pemeriksaan medis saat mendaftar? <span class="faq-arrow">↓</span></div>
+        <div class="faq-a">Proses underwriting dilakukan saat pendaftaran. Tergantung usia dan besarnya SA yang dipilih, mungkin diperlukan pemeriksaan kesehatan dasar. Tim agen kami akan memandu prosesnya agar semudah mungkin untuk Anda.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<div class="cta-section">
+  <div class="container">
+    <h2 class="section-title">Siap Melindungi Keluarga Anda?</h2>
+    <p class="section-lead">Proteksi terbaik adalah yang dimulai hari ini. Konsultasikan kebutuhan Anda bersama agen kami — gratis, tanpa tekanan.</p>
+    <button class="btn-white" onclick="document.getElementById('kalkulator').scrollIntoView({behavior:'smooth'})">Mulai Simulasi Sekarang</button>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Prina Insurance</div>
+  <div class="footer-note">PrinaEndow 20 adalah produk asuransi jiwa perorangan. Simulasi premi dihitung berdasarkan Tabel Mortalitas Indonesia (TMI) 2019. Nilai aktual premi dapat berbeda setelah proses underwriting lengkap. Produk ini diawasi oleh Otoritas Jasa Keuangan (OJK). Untuk informasi lebih lanjut, hubungi agen resmi Prina Insurance.</div>
+</footer>
+
+<script>
+/* ── TMI 2019 ── */
+const TMI={male:{0:0.00524,1:0.00053,2:0.00042,3:0.00034,4:0.00029,5:0.00026,6:0.00023,7:0.00021,8:0.0002,9:0.0002,10:0.00019,11:0.00019,12:0.00019,13:0.0002,14:0.00023,15:0.00027,16:0.00031,17:0.00037,18:0.00043,19:0.00047,20:0.00049,21:0.00049,22:0.00049,23:0.00049,24:0.0005,25:0.00052,26:0.00055,27:0.0006,28:0.00065,29:0.0007,30:0.00075,31:0.00081,32:0.00087,33:0.00093,34:0.00099,35:0.00107,36:0.00116,37:0.00127,38:0.00139,39:0.00155,40:0.00173,41:0.00193,42:0.00216,43:0.00241,44:0.0027,45:0.00302,46:0.00338,47:0.00377,48:0.00418,49:0.00461,50:0.00508,51:0.00556,52:0.00609,53:0.00667,54:0.00727,55:0.00789,56:0.00847,57:0.00898,58:0.00939,59:0.00971,60:0.00999,61:0.01024,62:0.01046,63:0.01071,64:0.01104,65:0.01146,66:0.01199,67:0.0126,68:0.01329,69:0.01405,70:0.01485,71:0.01574,72:0.0167,73:0.01777,74:0.01895,75:0.02026,76:0.02369,77:0.02738,78:0.0313,79:0.03693,80:0.04518},female:{0:0.00266,1:0.00041,2:0.00031,3:0.00024,4:0.00021,5:0.0002,6:0.00022,7:0.00023,8:0.00022,9:0.00021,10:0.00019,11:0.00018,12:0.0002,13:0.00022,14:0.00023,15:0.00023,16:0.00024,17:0.00024,18:0.00025,19:0.00026,20:0.00027,21:0.00028,22:0.0003,23:0.00032,24:0.00034,25:0.00038,26:0.00042,27:0.00046,28:0.00049,29:0.00052,30:0.00056,31:0.0006,32:0.00064,33:0.00069,34:0.00074,35:0.0008,36:0.00086,37:0.00093,38:0.001,39:0.00108,40:0.00118,41:0.00128,42:0.00141,43:0.00154,44:0.00169,45:0.00187,46:0.00209,47:0.0023,48:0.00253,49:0.00277,50:0.00305,51:0.00335,52:0.00368,53:0.00403,54:0.00442,55:0.00483,56:0.00524,57:0.00563,58:0.00601,59:0.00636,60:0.00671,61:0.00707,62:0.00746,63:0.00788,64:0.00833,65:0.00883,66:0.0094,67:0.01005,68:0.01076,69:0.0115,70:0.01229,71:0.01314,72:0.01406,73:0.01508,74:0.0162,75:0.01743,76:0.01879,77:0.0203,78:0.02326,79:0.0288,80:0.03569}};
+
+let gender='male';
+const SAvals=[100,150,200,250,300,350,400,450,500,600,700,800,900,1000,1200,1400,1600,1800,2000];
+
+function setGender(g){
+  gender=g;
+  document.getElementById('gbm').classList.toggle('active',g==='male');
+  document.getElementById('gbf').classList.toggle('active',g==='female');
+}
+function updateSADisplay(v){
+  const val=SAvals[v-1];
+  document.getElementById('sa-display').textContent='Rp '+(val>=1000?(val/1000)+'M':val+'jt');
+}
+updateSADisplay(5);
+
+function fmtRp(v){return'Rp '+Math.round(v).toLocaleString('id-ID')}
+
+function buildDecrement(x,g,n=20){
+  const rows=[];
+  const wd=[0.12,0.12,0.07,0.07,0.07];
+  for(let t=0;t<n;t++){
+    const age=x+t;
+    const qm1=TMI[g][age]||0;
+    const qm2=0.10*qm1;
+    const qm3=0.05*qm1;
+    const qm4=t<2?0.12:t<5?0.07:0.03;
+    const udd=(a,b,c,d)=>{const s1=b+c+d;const s2=b*c+b*d+c*d;return a*(1-0.5*s1+(1/3)*s2-0.25*b*c*d);};
+    const q1=udd(qm1,qm2,qm3,qm4);
+    const q2=udd(qm2,qm1,qm3,qm4);
+    const q3=udd(qm3,qm1,qm2,qm4);
+    const q4=udd(qm4,qm1,qm2,qm3);
+    rows.push({t,age,q1,q2,q3,q4,pTau:1-q1-q2-q3-q4});
+  }
+  return rows;
+}
+
+function computePremium(x,g,SA,i){
+  const n=20,v=1/(1+i);
+  const rows=buildDecrement(x,g,n);
+  const tpx=[1];
+  for(let t=0;t<n;t++) tpx.push(tpx[t]*rows[t].pTau);
+  let a_due=0;
+  for(let t=0;t<n;t++) a_due+=Math.pow(v,t)*tpx[t];
+  let Pg=0;
+  const V=new Array(n+1).fill(0);
+  for(let iter=0;iter<10;iter++){
+    for(let k=0;k<n;k++){
+      const r=rows[k];
+      const Dk=r.q1*SA+r.q2*2*SA+r.q3*SA;
+      V[k+1]=((V[k]+Pg)/v-Dk)/(0.5*r.q4+r.pTau);
+    }
+    let APV_B=0;
+    for(let t=0;t<n;t++){
+      const r=rows[t];
+      APV_B+=Math.pow(v,t+1)*tpx[t]*(r.q1*SA+r.q2*2*SA+r.q3*SA+r.q4*0.5*V[t+1]);
+    }
+    APV_B+=Math.pow(v,n)*tpx[n]*SA;
+    const newPg=APV_B/(0.78*a_due-0.33);
+    if(Math.abs(newPg-Pg)<0.01){Pg=newPg;break;}
+    Pg=newPg;
+  }
+  for(let k=0;k<n;k++){
+    const r=rows[k];
+    const Dk=r.q1*SA+r.q2*2*SA+r.q3*SA;
+    V[k+1]=((V[k]+Pg)/v-Dk)/(0.5*r.q4+r.pTau);
+  }
+  return{Pg,V,SA};
+}
+
+function calculate(){
+  const x=parseInt(document.getElementById('inp-age').value);
+  const saIdx=parseInt(document.getElementById('inp-sa').value);
+  const SA=SAvals[saIdx-1]*1e6;
+  const i=parseInt(document.getElementById('inp-rate').value)/1000;
+
+  if(x+20>80){alert('Usia masuk + 20 tidak boleh lebih dari 80 tahun.');return;}
+
+  const{Pg,V}=computePremium(x,gender,SA,i);
+
+  document.getElementById('results-placeholder').style.display='none';
+  document.getElementById('results-content').style.display='block';
+  document.getElementById('res-premi').textContent=fmtRp(Pg)+' / tahun';
+  document.getElementById('res-death').textContent=fmtRp(SA);
+  document.getElementById('res-sa').textContent=fmtRp(SA);
+  document.getElementById('res-accident').textContent=fmtRp(2*SA);
+  document.getElementById('res-acc2').textContent=fmtRp(2*SA);
+  document.getElementById('res-tpd').textContent=fmtRp(SA)+' (100%)';
+  document.getElementById('res-tpd100').textContent=fmtRp(SA);
+  document.getElementById('res-tpd65').textContent=fmtRp(0.65*SA);
+  document.getElementById('res-tpd50').textContent=fmtRp(0.5*SA);
+  document.getElementById('res-tpd30').textContent=fmtRp(0.3*SA);
+  document.getElementById('res-maturity').textContent=fmtRp(SA);
+
+  // Timeline milestones
+  const milestones=[5,10,15,20];
+  document.getElementById('timeline-milestones').innerHTML=milestones.map(yr=>`
+    <div class="milestone">
+      <div class="milestone-yr">Tahun ${yr}</div>
+      <div class="milestone-val">${fmtRp(yr<20?0.5*V[yr]:SA)}</div>
+    </div>
+  `).join('');
+}
+
+function switchScenario(btn,id){
+  document.querySelectorAll('.s-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.scenario-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+function toggleFaq(el){
+  const item=el.closest('.faq-item');
+  item.classList.toggle('open');
+}
+
+/* scroll fade-in for cards */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}});
+},{threshold:0.1});
+document.querySelectorAll('.why-card,.story-card').forEach(el=>{
+  el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity 0.5s ease,transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
